@@ -1,4 +1,10 @@
 {
+    "variables": {
+        "activation_code": "{{env `ACTIVATION_CODE`}}"
+    },
+    "sensitive-variables": [
+        "activation_code"
+    ],
     "builders": [
         {
             "type": "virtualbox-iso",
