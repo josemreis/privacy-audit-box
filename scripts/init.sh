@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -e # exit immediatly on error
+set -v # Print commands and their arguments as they are executed.
+set -x
+
 # clean out the cached package data
 sudo apt-get clean -q
 
