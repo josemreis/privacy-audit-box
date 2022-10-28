@@ -1,23 +1,6 @@
 {
-    "variables": {
-        "activation_code": "{{env `ACTIVATION_CODE`}}"
-    },
-    "sensitive-variables": [
-        "activation_code"
-    ],
     "builders": [
         {
-            "type": "virtualbox-iso",
-            "guest_os_type": "Ubuntu_64",
-            "iso_url": "https://releases.ubuntu.com/jammy/ubuntu-22.04.1-live-server-amd64.iso",
-            "iso_checksum": "10f19c5b2b8d6db711582e0e27f5116296c34fe4b313ba45f9b201a5007056cb",
-            "iso_checksum_type": "sha256",
-            "output_directory": "privacy-audit-box",
-            "vm_name": "privacy-audit-box-22.04-amd64",
-            "disk_size": 10000,
-            "headless": "true",
-            "http_directory": "http",
-            "boot_wait": "10s",
             "boot_command": [
                 "",
                 "",
@@ -43,14 +26,21 @@
                 " -- ",
                 ""
             ],
-            "ssh_timeout": "60m",
-            "ssh_username": "vagrant",
+            "boot_wait": "10s",
+            "disk_size": 10000,
+            "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+            "guest_os_type": "Ubuntu_64",
+            "headless": "true",
+            "http_directory": "http",
+            "iso_checksum": "sha256:10f19c5b2b8d6db711582e0e27f5116296c34fe4b313ba45f9b201a5007056cb",
+            "iso_url": "https://releases.ubuntu.com/jammy/ubuntu-22.04.1-live-server-amd64.iso",
+            "output_directory": "privacy-audit-box",
+            "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
             "ssh_password": "vagrant",
             "ssh_port": 22,
-            "ssh_wait_timeout": "10000s",
-            "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
-            "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
-            "virtualbox_version_file": ".vbox_version",
+            "ssh_timeout": "60m",
+            "ssh_username": "vagrant",
+            "type": "virtualbox-iso",
             "vboxmanage": [
                 [
                     "modifyvm",
@@ -64,23 +54,33 @@
                     "--cpus",
                     2
                 ]
-            ]
-        }
-    ],
-    "provisioners": [
-        {
-            "type": "shell",
-            "scripts": [
-                "scripts/init.sh",
-                "scripts/cleanup.sh"
-            ]
+            ],
+            "virtualbox_version_file": ".vbox_version",
+            "vm_name": "privacy-audit-box-22.04-amd64"
         }
     ],
     "post-processors": [
         {
-            "type": "vagrant",
             "compression_level": "8",
-            "output": "ubuntu-18.04-{{.Provider}}.box"
+            "output": "privacy-audit-ubuntu-22.04-{{.Provider}}.box",
+            "type": "vagrant"
         }
-    ]
+    ],
+    "provisioners": [
+        {
+            "scripts": [
+                "scripts/init.sh",
+                "scripts/install-expressvpn.sh",
+                "scripts/install-miniconda.sh",
+                "scripts/install-openwpm.sh"
+            ],
+            "type": "shell"
+        }
+    ],
+    "sensitive-variables": [
+        "activation_code"
+    ],
+    "variables": {
+        "activation_code": "{{env `activation_code`}}"
+    }
 }
