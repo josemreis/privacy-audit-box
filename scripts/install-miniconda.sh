@@ -14,9 +14,8 @@ wget --quiet https://repo.anaconda.com/miniconda/$miniconda
 bash $miniconda -b -p $HOME/.miniconda3
 echo 'export PATH='$HOME/.miniconda3/bin:$PATH'' >>$HOME/.bashrc
 source $HOME/.bashrc
+# source it
+source $HOME/.miniconda3/etc/profile.d/conda.sh
 conda config --set always_yes yes --set changeps1 no
 conda update -q conda
 conda info -a
-
-# source it
-source $HOME/.miniconda3/etc/profile.d/conda.sh
