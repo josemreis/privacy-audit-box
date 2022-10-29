@@ -3,12 +3,8 @@
 set -e
 set -x
 
-# Debian/Ubuntu
-if [ -f /etc/debian_version ]; then
-    codename="$(facter lsbdistcodename)"
-    #cleanup apt
-    sudo apt-get clean
-fi
+#cleanup apt
+sudo apt-get clean
 
 #Stop services for cleanup
 sudo service rsyslog stop
