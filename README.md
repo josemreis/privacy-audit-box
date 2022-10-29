@@ -5,7 +5,7 @@ A vagrant virtualbox base box with conda, expressvpn, and openwpm installed.
 ## Building the box
 
 ```bash
-packer build -force -on-error=cleanup -varfile="variables.json" build.json
+packer build -force -on-error=cleanup -var-file="variables.json" build.json
 ```
 
 ## Expressvpn activation code
