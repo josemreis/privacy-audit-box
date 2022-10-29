@@ -23,6 +23,9 @@
         "virtualbox_guest_os_type": "Ubuntu_64",
         "vm_name": "privacy-audit-box-ubuntu-20.04"
     },
+    "sensitive-variables": [
+        "activation_code"
+    ],
     "builders": [
         {
             "boot_command": [
