@@ -104,7 +104,7 @@
             "compression_level": 8,
             "output": "privacy-audit-box-ubuntu-20.04-{{.Provider}}.box",
             "type": "vagrant",
-            "keep_input_artifact": true
+            "keep_input_artifact": false
         }
     ]
 }
