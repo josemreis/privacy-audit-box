@@ -4,6 +4,9 @@ set -e # exit immediatly on error
 set -v # Print commands and their arguments as they are executed.
 set -x
 
+SSH_USER=${SSH_USERNAME:-vagrant}
+SSH_USER_HOME=${SSH_USER_HOME:-/home/${SSH_USER}}
+
 # git clone openwpm
 cd /opt
 
@@ -15,7 +18,7 @@ echo "> Building the openwpm conda environment"
 echo ""
 
 cd OpenWPM/
-source $HOME/miniconda3/etc/profile.d/conda.sh
+source $SSH_USER_HOME/miniconda3/etc/profile.d/conda.sh
 # Make conda available to shell script
 eval "$(conda shell.bash hook)"
 if [ "$1" != "--skip-create" ]; then

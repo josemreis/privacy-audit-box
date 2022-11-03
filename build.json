@@ -91,6 +91,8 @@
             "expect_disconnect": true,
             "scripts": [
                 "scripts/init.sh",
+                "scripts/vagrant.sh",
+                "scripts/virtualbox.sh",
                 "scripts/install-expressvpn.sh",
                 "scripts/install-miniconda.sh",
                 "scripts/install-openwpm.sh",
